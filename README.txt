@@ -9,7 +9,7 @@
 |************* Descrição do Projeto **************|
 |						  |
 |O código disponibilizado neste repositório é uma |
-|atividade da disciplina DevWeb e contem a implen-|
+|atividade da disciplina DevWeb e contêm a implen-|
 |mentação de um banco de dados SQL-Alquemy + 	  |
 |UnitTest utilizando a linguagem |Python3. A ati- |
 |vidade foi desempenhada para obtenção de nota    |
