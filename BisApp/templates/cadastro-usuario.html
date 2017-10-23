@@ -1,0 +1,128 @@
+{% extends 'layout.html' %}
+{% block Content %}
+
+  <br>
+<div class="container" align="center">
+        <div class="jumbotron" align="center">
+            <h2>CADASTRAR USUARIO</h2>
+            <br>
+            <form method="POST" action="{% if Informacoes: %} {{url_for('alterarUsuario', index=index)}} {% else %} {{url_for('cadusuario')}} {% endif %}">
+            <div class="form-group">
+                <b>Nome</b> <input type="text" placeholder="Nome" class="form-control" name="nome" {%if Informacoes: %} value="{{Informacoes['nome']}}" {% endif %}>
+            </div>
+            <div class="form-group">
+                <b>Endereço</b> <input type="text" placeholder="Endereço" class="form-control" name="endereco" {%if Informacoes: %} value="{{Informacoes['endereco']}}" {% endif %}>
+            </div>
+            <div class="form-group">
+                <b>CPF</b> <input type="text" placeholder="CPF" class="form-control" name="cpf" {%if Informacoes: %} value="{{Informacoes['cpf']}}" {% endif %}>
+            </div>
+
+            <div  align="center">
+            <div class="form-check">
+              <label class="form-check-label"> <b> Sexo</b> <br>
+                <input class="form-check-input" type="radio" name="sexo" id="exampleRadios1" value="M" {%if Informacoes and Informacoes['sexo'] == "M" %} checked {% endif %}>
+                Masculino
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="sexo" id="exampleRadios2" value="F" {%if Informacoes and Informacoes['sexo'] == "F" %} checked {% endif %}>
+                Feminino
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="sexo" id="exampleRadios3" value="NDA" {%if not Informacoes %} checked {% endif %}>
+                Não definido
+              </label>
+            </div>
+            </div>
+
+            <div class="form-group">
+                <b>Usuário</b> <input type="text" placeholder="Nome de Usuário" class="form-control" name="usuario" {%if Informacoes: %} value="{{Informacoes['usuario']}}" {% endif %}>
+            </div>
+
+            <div  align="center">
+            <div class="form-check">
+              <label class="form-check-label"> <b> Tipo</b> <br>
+                <input class="form-check-input" type="radio" name="tipo" id="exampleRadios1" value="Adm" {%if Informacoes and Informacoes['sexo'] == "Adm" %} checked {% endif %}checked>
+                Administrador
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="tipo" id="exampleRadios2" value="User" {%if not Informacoes %} checked {% endif %}>
+                Comum
+              </label>
+            </div>
+            </div>
+
+            <div class="form-group">
+                <b>Senha</b> <input type="password" placeholder="Senha" class="form-control" name="senha" {%if Informacoes: %} value="{{Informacoes['senha']}}" {% endif %}>
+            </div>
+           <div class="form-group">
+                <b>Confirmar Senha</b> <input type="password" placeholder="Confirmar Senha" class="form-control" name="confirmarSenha" {%if Informacoes: %} value="{{Informacoes['senha']}}" {% endif %}>
+            </div>
+            <div class="checkbox">
+            <label>
+            <input type="checkbox" value="Concordar" align="left" name="termos"> Concordo com os termos
+            </label>
+            </div>
+            <button class="btn btn-primary " type="submit">Cadastrar</button>
+            </form>
+        </div>
+
+    </div>
+<div class="container" align="center">
+        <div class="jumbotron" align="center">
+           <div class="container">
+    <div class="row" align="center">
+        <div class="panel panel-primary filterable">
+            <div class="panel-heading">
+                <h3 class="panel-title">Usuários Cadastrados</h3>
+                <div class="pull-right" align="right">
+                    <button class="btn btn-primary btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                </div>
+            </div>
+            <table class="table table-striped"  align="center">
+                <thead>
+                    <tr class="filters">
+                        <th><input type="text" class="form-control" placeholder="Código" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Usuario" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Nome" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Endereço" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="CPF" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Sexo" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Tipo" disabled></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {% for l in Lista if not Lista.hidden: %}
+                              <tr>
+                              {% for c in l.__table__.columns.keys(): %}
+                                <td>{{l[c]}}</td>
+                              {% endfor %}
+                              <td><a href="{{url_for('alterarUsuario', index=l.id)}}" class="btn" style="background-color: #FFD700; color: black">
+                                <i class="fa fa-pencil fa-fw"></i>
+                                Alterar</a>
+                              </td>
+                              <td><a href="{{url_for('removerUsuario', index=l.id)}}" class="btn btn-danger">
+                                <i class="fa fa-trash-o fa-lg"></i>
+                                Delete</a>
+                              </td>
+                              </tr> 
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+        </div>
+<div align="justify" class="col-md-12">
+<br>
+<br>
+
+{% endblock %}

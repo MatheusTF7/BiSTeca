@@ -1,40 +1,40 @@
  _________________________________________________
-|******************* Nome ************************|
-|						  |
-| Bi -> Biblio					  |
-| S - > Sistema					  |
-| Teca - > Teca					  |
-| BiSTeca == Sistema BiblioTeca			  |
-|						  |
-|************* DescriÁ„o do Projeto **************|
-|						  |
-|O cÛdigo disponibilizado neste repositÛrio È uma |
-|atividade da disciplina DevWeb e contÍm a implen-|
-|mentaÁ„o de um banco de dados SQL-Alquemy + 	  |
+|********************* Nome **********************|
+|						  						  |
+| Bi -> Biblio									  |
+| S - > Sistema									  |
+| Teca - > Teca									  |
+| BiSTeca == Sistema BiblioTeca					  |
+|						 						  |
+|**************** Descri√ß√£o do Projeto ***********|
+|												  |
+|O c√≥digo disponibilizado neste reposit√≥rio √© uma |
+|atividade da disciplina DevWeb e contem a implen-|
+|menta√ß√£o de um banco de dados SQL-Alquemy + 	  |
 |UnitTest utilizando a linguagem |Python3. A ati- |
-|vidade foi desempenhada para obtenÁ„o de nota    |
-|parcial, objetivando a conclus„o e aprovaÁ„o na  |
-|disciplina de DevWeb.				  |
-|						  |
-|************** Banco de Dados *******************|
-|						  |
-|O banco de dados corresponde ‡ um banco de dados |
+|vidade foi desempenhada para obten√ß√£o de nota    |
+|parcial, objetivando a conclus√£o e aprova√ß√£o na  |
+|disciplina de DevWeb.							  |
+|						 						  |
+|***************** Banco de Dados ****************|
+|												  |
+|O banco de dados corresponde √† um banco de dados |
 |simples com 4 entidades de uma biblioteca.       |
-|O banco est· estruturado nas entidades Usuario,  |
+|O banco est√° estruturado nas entidades Usuario,  |
 |Emprestimo, Exemplar e Autor. Para cada entidade |
-|est„o definidos relacionamentos 1:1, 1:N ou N:N  |
-|de acordo com a necessidade ou especificaÁ„o do  |
-|trabalho. Entre Usuario e Emprestimo È definido  |
-|um relacionamento 1:N. Entre Emprestimo e 	  |
-|Exemplar est· definido um relacionamento 1:1.    |
-|Entre Exemplar e Autor est· definido um relacio- |
-|namento N:N.					  |
-|						  |
-|****************** Equipe ***********************|
-|						  |
-|A equipe È formada por 2 integrantes:            |
+|est√£o definidos relacionamentos 1:1, 1:N ou N:N  |
+|de acordo com a necessidade ou especifica√ß√£o do  |
+|trabalho. Entre Usuario e Emprestimo √© definido  |
+|um relacionamento 1:N. Entre Emprestimo e 	 	  |
+|Exemplar est√° definido um relacionamento 1:1.    |
+|Entre Exemplar e Autor est√° definido um relacio- |
+|namento N:N.									  |
+|						 						  |
+|******************* Equipe **********************|
+|												  |
+|A equipe √© formada por 2 integrantes:            |
 |Matheus Gurgel e Felipe Harlen, ambos alunos do  |
-|Bacharelado em CiÍncia da ComputaÁ„o do IFCE     |
-|Campus Aracati.				  |
+|Bacharelado em Ci√™ncia da Computa√ß√£o do IFCE     |
+|Campus Aracati.								  |
 |*************************************************|
 |_________________________________________________|

@@ -1,0 +1,83 @@
+{% extends 'layout.html' %}
+{% block Content %}
+
+  <br>
+<div class="container" align="center">
+        <div class="jumbotron" align="center">
+            <h2>CADASTRAR AUTOR</h2>
+            <br>
+            <form method="POST" action="">
+            <div class="form-group">
+                <b>Nome</b> <input type="text" placeholder="Nome" class="form-control" name="nome">
+            </div>
+            <div class="form-group">
+                   Livros:  <select name="exemplar" class="form-control" id="exampleSelect1">
+                                {% for Exemplar in exemplares if not exemplares.hidden: %}
+                                    <option value="{{Exemplar.id}}">{{Exemplar.titulo}}</option>
+                                {% endfor %}
+                                </select>
+                </div>
+            <div class="form-group">
+                Biografia <textarea  type="text" placeholder="Biografia" class="form-control" cols="50" rows="7" name="biografia"></textarea>
+            </div>
+            <div class="checkbox">
+            <label>
+            <input type="checkbox" value="Concordar" align="left" name="termos"> Concordo com os termos
+            </label>
+            </div>
+            <button class="btn btn-primary " type="submit">Cadastrar</button>
+            </form>
+        </div>
+
+    </div>
+<div class="container" align="center">
+        <div class="jumbotron" align="center">
+           <div class="container">
+    <div class="row" align="center">
+        <div class="panel panel-primary filterable">
+            <div class="panel-heading">
+                <h3 class="panel-title">Autores Cadastrados</h3>
+                <div class="pull-right" align="right">
+                    <button class="btn btn-primary btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                </div>
+            </div>
+            <table class="table table-striped"  align="center">
+                <thead>
+                    <tr class="filters">
+                        <th><input type="text" class="form-control" placeholder="Código" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Nome" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Livros" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Biografia" disabled></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {% for l in Lista if not Lista.hidden: %}
+                              <tr>
+                              {% for c in l.__table__.columns.keys(): %}
+                                <td>{{l[c]}}</td>
+                              {% endfor %}
+                              <td><a href="#" class="btn" style="background-color: #FFD700; color: black">
+                                <i class="fa fa-pencil fa-fw"></i>
+                                Alterar</a>
+                              </td>
+                              <td><a href="{{url_for('removerAutor', index=l.id)}}" class="btn btn-danger">
+                                <i class="fa fa-trash-o fa-lg"></i>
+                                Delete</a>
+                              </td>
+                              </tr> 
+                        {% endfor %}
+                    </tr>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+        </div>
+<div align="justify" class="col-md-12">
+<br>
+<br>
+
+{% endblock %}

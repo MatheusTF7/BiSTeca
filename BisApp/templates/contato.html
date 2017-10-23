@@ -1,0 +1,84 @@
+{% extends 'layout.html' %}
+{% block Content %}
+
+<br>
+<div class="container" align="center">
+        <div class="jumbotron" align="center">
+            <h2>CONTATO</h2>
+            <br>
+            <form method="POST" action=" {% if Informacoes: %} {{url_for('alterarContato', index=index)}} {% else %} {{url_for('contato')}} {% endif %}">
+            <div class="form-group">
+               Nome <input type="text" placeholder="Nome" class="form-control" name="nome" {%if Informacoes: %} value="{{Informacoes['nome']}}" {% endif %}>
+            </div>
+            <div class="form-group">
+                E-mail <input type="text" placeholder="E-mail" class="form-control" name="email" {%if Informacoes: %} value="{{Informacoes['email']}}" {% endif %}>
+            </div>
+            <div class="form-group">
+                CPF <input type="text" placeholder="CPF" class="form-control" name="cpf" {%if Informacoes: %} value="{{Informacoes['cpf']}}" {% endif %}>
+            </div>
+            <div class="form-group" id="inform">
+                Mensagem <textarea  type="text" placeholder="Digite sua mensagem" class="form-control" cols="50" rows="7" name="msg" {%if Informacoes: %} value="{{Informacoes['msg']}}" {% endif %}></textarea>
+            </div>
+            <div class="checkbox">
+            <label>
+            <input type="checkbox" value="Concordar" name="" align="left" name="termos"> Concordo com os termos
+            </label>
+            </div>
+            <button class="btn btn-primary " type="submit">Enviar</button>
+            </form>
+        </div>
+
+{% if session['usuario'] == 'Adm' %}
+<br><br>
+        <div class="container" align="center">
+        <div class="jumbotron" align="center">
+           <div class="container">
+    <div class="row" align="center">
+        <div class="panel panel-primary filterable">
+            <div class="panel-heading">
+                <h3 class="panel-title">Contatos Recebidos</h3>
+                <div class="pull-right" align="right">
+                    <button class="btn btn-primary btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                </div>
+            </div>
+            <table class="table table-striped"  align="center">
+                <thead>
+                    <tr class="filters">
+                        <th><input type="text" class="form-control" placeholder="Código" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Nome" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="E-mail" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="CPF" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Mensagem" disabled></th>
+                        <!--<th><input type="text" class="form-control" placeholder="Tipo" disabled></th>-->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {% for l in Lista if not Lista.hidden: %}
+                              <tr>
+                              {% for c in l.__table__.columns.keys(): %}
+                                <td>{{l[c]}}</td>
+                              {% endfor %}
+                              <td><a href="{{url_for('alterarContato', index=l.id)}}" class="btn" style="background-color: #FFD700; color: black">
+                                <i class="fa fa-pencil fa-fw"></i>
+                                Alterar</a>
+                              </td>
+                              <td><a href="{{url_for('removerContato', index=l.id)}}" class="btn btn-danger">
+                                <i class="fa fa-trash-o fa-lg"></i>
+                                Delete</a>
+                              </td>
+                              </tr> 
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+        </div>
+<div align="justify" class="col-md-12">
+<br>
+<br>
+{% endif %}
+{% endblock %}

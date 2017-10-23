@@ -1,170 +1,101 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/static/icons/book1.ico">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/static/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="/static/css/theme.css" type="text/css"> 
-  <link rel="stylesheet" href="/static/css/techstore.css" type="text/css"> 
+    <title>Biblioteca</title>
 
-  {% if estilo %}
-    <link rel="stylesheet" href="/static/css/{{estilo}}.css" type="text/css">
-  {% endif %}
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" >
+
+    <!-- Custom styles for this template -->
+    <link href="/static/css/jumbotron.css" rel="stylesheet">
+    <link href="/static/css/carousel.css" rel="stylesheet">
+    <link href="/static/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" >
+    <link href="/static/css/tabelas.css" rel="stylesheet">
 
   </head>
 
-<body>
-  <nav class="navbar navbar-expand-md navbar-light bg-primary">
-    <div class="container">
-      <a class="navbar-brand" href="#">TechStore</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <body>
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <img src="/static/icons/book.ico" width="25" height="25">
+      <a class="navbar-brand" href="{{url_for('homepage')}}">BisTeca</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse " id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="{{url_for('homepage')}}">Home <span class="sr-only">(current)</span></a>
+        
+        {% if session['usuario'] == 'Adm' %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cadastros</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="{{url_for('cadusuario')}}">Usuários</a>
+              <a class="dropdown-item" href="{{url_for('cadlivro')}}">Livros</a>
+              <a class="dropdown-item" href="{{url_for('cadautor')}}">Autor</a>
+              <a class="dropdown-item" href="{{url_for('contato')}}">Contatos</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="{{url_for('emprestimo')}}">Emprestar Livro</a>  
+          </li>
+          {% endif %}
+
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="{{url_for('consacervo')}}">Consultar Acervo</a>  
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Produtos</a>
+            <a class="nav-link" href="{{url_for('contato')}}">Contato</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Sobre</a>
-          </li>
+            <a class="nav-link" href="{{url_for('sobre')}}">Sobre</a>
+          </li>   
         </ul>
-        <form class="form-inline my-2 my-lg-0" action="#" method="GET">
-          <input name="busca" class="form-control mr-sm-2" type="text" placeholder="Produto">
-          <button class="btn btn-info my-2 my-sm-0" type="submit">Buscar</button>
-        </form>
-      </div>
+        <img src="/static/images/profile-pictures.png" class="img-fluid" width="42px" height="42px" style="margin-right: 5px">
+          {% if 'usuario' in session %}
+          <a href="{{url_for('logout')}}"><button class="btn btn-primary" type="button">Sair</button></a>
+          {% else %}
+          <a href="{{url_for('login')}}"><button class="btn btn-primary" type="button">Login</button></a> 
+          {% endif %}
     </div>
   </nav>
-  <div class="py-5 text-center">
-  
-    <div class="container">
-      {% block conteudo %}
-      {% endblock %}
-    </div>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <div class="card my-1">
-            <div class="card-block text-center">
-              <h2>Básico</h2>
-              <h3>R$ 876,54</h3>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Até 10 vezes no carnê!</li>
-              <li class="list-group-item">2 GB RAM</li>
-              <li class="list-group-item">4 GB HDD</li>
-            </ul>
-            <div class="card-block">
-              <a href="#" class="btn btn-block btn-primary">Subscribe</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card ">
-            <div class="bg-primary card-block">
-              <h1 class="card-title text-white">Normal</h1>
-              <h2 class="text-white">R$ 1000,54</h2>
-            </div>
-            <ul class="list-group list-group-flush ">
-              <li class="list-group-item">Até 10 vezes no carnê!</li>
-              <li class="list-group-item">4 GB</li>
-              <li class="list-group-item">1 TB</li>
-            </ul>
-            <div class="card-block ">
-              <a href="#" class="btn btn-block btn-lg btn-primary">Comprar</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card my-1">
-            <div class="card-block text-xs-center">
-              <h2 class="card-title">Avançado</h2>
-              <h3 class="">R$ 3500,00</h3>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Até 10 vezes no carnê!</li>
-              <li class="list-group-item">32 GB</li>
-              <li class="list-group-item">5 TB</li>
-            </ul>
-            <div class="card-block ">
-              <a href="#" class="btn btn-block btn-primary">Comprar</a>
-            </div>
-          </div>
-        </div>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+    <br>
+      <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span ariahidden="true">x</span>
+        </button>
+          {{message}}
       </div>
-    </div>
-  </div>
-  <div class="py-5 text-center bg-primary">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <img src="/static/img/pc.jpg" class="d-block mx-auto img-thumbnail img-fluid my-3 techstore-advertisement--img">
-          <h3>Computadores</h3>
-          <p>Os melhores produtos!</p>
-        </div>
-        <div class="col-md-4">
-          <img src="/static/img/nobo.jpg" class="d-block mx-auto img-thumbnail img-fluid my-3 techstore-advertisement--img">
-          <h3>Notebooks</h3>
-          <p>Os melhores produtos!</p>
-        </div>
-        <div class="col-md-4">
-          <img src="/static/img/ace.jpg" class="d-block mx-auto img-thumbnail img-fluid my-3 techstore-advertisement--img">
-          <h3>Acessórios</h3>
-          <p>Os melhores produtos!</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="py-5 bg-inverse text-white">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <h1 class=" pi-item">TECH STORE</h1>
-          <p><strong>Tech Store, Inc.</strong>
-            <br>Rua X, Sala Y
-            <br>Aracati, BR 12345-098
-        </div>
-        <div class="col-md-6">
-          <h1 class="pi-item">CONTATO</h1>
-          <form action="#" method="POST">
-            <fieldset class="form-group"> <label for="nome">Nome:</label>
-              <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome"> </fieldset>
-            <fieldset class="form-group"> <label for="email">Endereço</label>
-              <input type="email" class="form-control" name="email" id="email" placeholder="E-mail">
-              </fieldset>
-              <input type="checkbox" 
-                      name="notificar_me" 
-                      value="" checked>Notificar me</input>
-            <fieldset class="form-group">
-              <input type="radio" name="prof" value="Professor">Professor</input>
-              <input type="radio" name="prof" value="Estudante">Estudante</input>
-            </fieldset>
-            <fieldset class="form-group">
-            <label for="mensagem">Mensagem</label>
-              <textarea name="mensagem" cols="50" rows="5">{{message}}</textarea>
-            </fieldset>
-            <fieldset class="form-group">
-            <select name="tipo">
-              {% for tipo in tipos %}
-                <option value="{{tipo.cod}}">{{tipo.info}}</option>
-              {% endfor %}
-            </select>
-            </fieldset>
-            <fieldset class="form-group">
-              <button type="submit" class="btn btn-success">Submit</button>
-            </fieldset>
-              }
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <script src="/static/js/jquery-3.1.1.min.js"></script>
-  <script src="/static/js/tether.min.js"></script>
-  <script src="/static/js/bootstrap-4.0.0-alpha.6.min.js"></script>
-</body>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
 
+  {% block Content %}
+  {% endblock %}
+
+  <div style="background-color: black; color: white" >
+      <footer class="rodape col-md-12">
+      <h2 align="center">Sistema Biblioteca</h2>
+        <p align="center"> CNPJ: XX.XXX.XXX-XXX-XX Copyright &copy; 2017 Todos os direitos reservados. Rua XXX - Aracatí/CE CEP: 62800-000 <br> <a href="#" style="color: white">www.sisbib.com</a> (88)77777-7777.</p>
+      </footer>
+  </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/popper.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/tabelas.js"></script>
+  </body>
 </html>

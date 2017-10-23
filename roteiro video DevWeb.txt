@@ -1,0 +1,15 @@
+Olá a todos, eu sou Matheus Gurgel, aluno do IFCE - Campus Aracati e curso Bacharelado em Ciência da Computação.
+Este vídeo é parte de uma nota parcial da disciplina Desenvolvimento Web, ministrada pelo Professor Silas. Dito isso irei apresentar meu trabalho que consiste na elaboração e criação de um banco de dados relacional com uso de uma ORM em Python... O banco deveria possuir os 3 tipos de relacionamento, 1:1 1:N e N:N
+
+apresentar o modelo do banco de dados e explicar
+
+SQLAlchemy é uma biblioteca de mapeamento objeto-relacional SQL em código aberto desenvolvido para a linguagem de programação Python
+foi lançado em fevereiro de 2006 e rapidamente se tornou uma das ferramentas de mapeamento objeto-relacional mais utilizadas juntamente com o ORM do Django, na comunidade Python
+
+falar sobre o Unit test:
+Um framework para testes unitarios em python. Ela consiste em testes automatizados para testar validação de funções específicas com base em resultados booleanos de aceitação ou falha.
+Para testar, você deve impotar o modulo unittest do python e fazer um conjunto de testes específicos para cada função que se deseja testar. por exemplo, o CRUD desempenhado neste trabalho.
+
+explicar Inserir e o teste
+alteração e o teste
+explicar exclusão e teste

@@ -1,0 +1,74 @@
+{% block Content %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="static/icons/book.ico">
+
+    <title>Biblioteca</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="static/css/bootstrap.min.css" rel="stylesheet" >
+
+    <!-- Custom styles for this template -->
+    <link href="static/css/jumbotron.css" rel="stylesheet">
+    <link href="static/css/login.css" rel="stylesheet">
+  </head>
+
+  <body>
+<!--
+    you can substitue the span of reauth email for a input with the email and
+    include the remember me checkbox
+    -->
+    {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+    <br>
+      <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span ariahidden="true">x</span>
+        </button>
+          {{message}}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+    <div class="container">
+        <div class="card card-container">
+            <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+            <img id="profile-img" class="profile-img-card" src="static/images/profile-pictures.png" />
+            <p id="profile-name" class="profile-name-card"></p>
+            <form class="form-signin" method="POST" action="{{url_for('login')}}">
+                <span id="reauth-email" class="reauth-email"></span>
+                <input type="text" id="inputEmail" class="form-control" placeholder="Usuário" required autofocus name="usuario">
+                <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required name="senha">
+                <div id="remember" class="checkbox">
+                    <label>
+                        <input type="checkbox" value="remember-me"> Lembrar-me
+                    </label>
+                </div>
+                <button class="btn btn-primary my-2 my-sm-0" type="submite">Entrar</button>
+            </form><!-- /form -->
+            <a href="#" class="forgot-password">
+                Esqueceu a senha?
+            </a>
+        </div><!-- /card-container -->
+    </div><!-- /container -->
+    
+  <div style=" color: white" >
+      <footer class="rodape col-md-12">
+      <h2 align="center">Sistema Biblioteca</h2>
+        <p align="center"> CNPJ: XX.XXX.XXX-XXX-XX Copyright &copy; 2017 Todos os direitos reservados. Rua XXX - Aracatí/CE CEP: 62800-000 <br> <a href="#" style="color: white">www.sisbib.com</a> (88)77777-7777.</p>
+      </footer>
+  </div>
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/popper.min.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+  </body>
+</html>
+
+{% endblock %}

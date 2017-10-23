@@ -12,20 +12,21 @@ class TechAppTestCase(unittest.TestCase):
 	def test_add_usuario(self):
 		#data = datetime.date(2017,9,12)
 		#print(data)
-		db.session.add(models.Usuario('User1','Senha1', 'Endereco1', '1', 'M'))
-		db.session.add(models.Usuario('User2','Senha2', 'Endereco2', '2', 'M'))
-		db.session.add(models.Usuario('User3','Senha3', 'Endereco3', '3', 'F'))
-		db.session.add(models.Usuario('User4','Senha4', 'Endereco4', '4', 'F'))
+		db.session.add(models.Usuario('User1','Senha1', 'Endereco1', '1', 'M', 'U'))
+		db.session.add(models.Usuario('User2','Senha2', 'Endereco2', '2', 'M', 'U'))
+		db.session.add(models.Usuario('User3','Senha3', 'Endereco3', '3', 'F', 'U'))
+		db.session.add(models.Usuario('User4','Senha4', 'Endereco4', '4', 'F', 'U'))
 		db.session.commit()
 
 		Usuarios = models.Usuario.query.all()
+
 		self.assertEqual(Usuarios[3].nome, 'User4')
 		Usuario = models.Usuario.query.filter_by(nome = 'User1').first()
 		self.assertEqual(Usuario.nome, 'User1')
 		self.assertEqual(len(Usuarios), 4)
 
 	def test_alterar_usuario(self):
-		usuario = models.Usuario('User1','Senha1', 'Endereco1', '1', 'M')
+		usuario = models.Usuario('User1','Senha1', 'Endereco1', '1', 'M', 'U')
 		db.session.add(usuario)
 		db.session.commit()
 		models.alterar_usuario(usuario.id, 'UserAlterado')
@@ -33,7 +34,7 @@ class TechAppTestCase(unittest.TestCase):
 
 
 	def test_remover_usuario(self):
-		usuario = models.Usuario('User1','Senha1', 'Endereco1', '1', 'M')
+		usuario = models.Usuario('User1','Senha1', 'Endereco1', '1', 'M', 'U')
 		db.session.add(usuario)
 		db.session.commit()
 		count = len(models.Usuario.query.all())
@@ -44,8 +45,8 @@ class TechAppTestCase(unittest.TestCase):
 
 
 	def test_add_emprestimo(self):
-			db.session.add(models.Usuario('User1','Senha1', 'Endereco1', '1', 'M'))
-			db.session.add(models.Usuario('User2','Senha2', 'Endereco2', '2', 'F'))
+			db.session.add(models.Usuario('User1','Senha1', 'Endereco1', '1', 'M', 'U'))
+			db.session.add(models.Usuario('User2','Senha2', 'Endereco2', '2', 'F', 'U'))
 			db.session.add(models.Emprestimo(1, 'pendente'))
 			db.session.add(models.Emprestimo(1, 'pendente'))
 			db.session.add(models.Emprestimo(2, 'devolvido'))
@@ -60,7 +61,7 @@ class TechAppTestCase(unittest.TestCase):
 
 
 	def test_alterar_emprestimo(self):
-		db.session.add(models.Usuario('User1','Senha1', 'Endereco1', '1', 'M'))
+		db.session.add(models.Usuario('User1','Senha1', 'Endereco1', '1', 'M', 'U'))
 		emprestimo = models.Emprestimo(1, 'pendente')
 		db.session.add(emprestimo)
 		db.session.commit()
@@ -69,7 +70,7 @@ class TechAppTestCase(unittest.TestCase):
 
 
 	def test_remover_emprestimo(self):
-		db.session.add(models.Usuario('User1','Senha1', 'Endereco1', '1', 'M'))
+		db.session.add(models.Usuario('User1','Senha1', 'Endereco1', '1', 'M', 'U'))
 		emprestimo = models.Emprestimo(1, 'pendente')
 		db.session.add(emprestimo)
 		db.session.commit()
@@ -80,8 +81,8 @@ class TechAppTestCase(unittest.TestCase):
 
 
 	def test_add_exemplar(self):
-		db.session.add(models.Usuario('User1','Senha1', 'Endereco1', '1', 'M'))
-		db.session.add(models.Usuario('User2','Senha2', 'Endereco2', '2', 'F'))
+		db.session.add(models.Usuario('User1','Senha1', 'Endereco1', '1', 'M', 'U'))
+		db.session.add(models.Usuario('User2','Senha2', 'Endereco2', '2', 'F', 'U'))
 		db.session.add(models.Emprestimo(1, 'pendente'))
 		db.session.add(models.Emprestimo(1, 'pendente'))
 		db.session.add(models.Emprestimo(2, 'devolvido'))
@@ -102,8 +103,8 @@ class TechAppTestCase(unittest.TestCase):
 
 
 	def test_alterar_exemplar(self):
-		db.session.add(models.Usuario('User1','Senha1', 'Endereco1', '1', 'M'))
-		db.session.add(models.Usuario('User2','Senha2', 'Endereco2', '2', 'F'))
+		db.session.add(models.Usuario('User1','Senha1', 'Endereco1', '1', 'M', 'U'))
+		db.session.add(models.Usuario('User2','Senha2', 'Endereco2', '2', 'F', 'U'))
 		db.session.add(models.Emprestimo(1, 'pendente'))
 		db.session.add(models.Emprestimo(1, 'pendente'))
 		db.session.add(models.Emprestimo(2, 'devolvido'))
@@ -117,8 +118,8 @@ class TechAppTestCase(unittest.TestCase):
 
 
 	def test_remover_exemplar(self):
-		db.session.add(models.Usuario('User1','Senha1', 'Endereco1', '1', 'M'))
-		db.session.add(models.Usuario('User2','Senha2', 'Endereco2', '2', 'F'))
+		db.session.add(models.Usuario('User1','Senha1', 'Endereco1', '1', 'M', 'U'))
+		db.session.add(models.Usuario('User2','Senha2', 'Endereco2', '2', 'F', 'U'))
 		db.session.add(models.Emprestimo(1, 'pendente'))
 		db.session.add(models.Emprestimo(1, 'pendente'))
 		db.session.add(models.Emprestimo(2, 'devolvido'))
@@ -134,8 +135,8 @@ class TechAppTestCase(unittest.TestCase):
 
 
 	def test_add_autor(self):
-		db.session.add(models.Usuario('User1','Senha1', 'Endereco1', '1', 'M'))
-		db.session.add(models.Usuario('User2','Senha2', 'Endereco2', '2', 'F'))
+		db.session.add(models.Usuario('User1','Senha1', 'Endereco1', '1', 'M', 'U'))
+		db.session.add(models.Usuario('User2','Senha2', 'Endereco2', '2', 'F', 'U'))
 
 		db.session.add(models.Emprestimo(1, 'pendente'))
 		db.session.add(models.Emprestimo(1, 'pendente'))
@@ -157,7 +158,7 @@ class TechAppTestCase(unittest.TestCase):
 		db.session.add(models.Autor('autor4', 'biografia4', exemplar2))
 		db.session.commit()
 
-		
+
 		autores = models.Autor.query.all()
 		self.assertEqual(autores[3].nome, 'autor4')
 		self.assertEqual(autores[3].exemplares[0].titulo, 'titulo2')
@@ -167,8 +168,8 @@ class TechAppTestCase(unittest.TestCase):
 
 
 	def test_alterar_autor(self):
-		db.session.add(models.Usuario('User1','Senha1', 'Endereco1', '1', 'M'))
-		db.session.add(models.Usuario('User2','Senha2', 'Endereco2', '2', 'F'))
+		db.session.add(models.Usuario('User1','Senha1', 'Endereco1', '1', 'M', 'U'))
+		db.session.add(models.Usuario('User2','Senha2', 'Endereco2', '2', 'F', 'U'))
 		db.session.add(models.Emprestimo(1, 'pendente'))
 		exemplar = models.Exemplar('titulo1', 'editora1', 'primeira', 1, 'observacao1', 1, 1)
 		exemplar2 = models.Exemplar('titulo2', 'editora2', 'primeira', 1, 'observacao2', 1, 2)
@@ -184,8 +185,8 @@ class TechAppTestCase(unittest.TestCase):
 
 
 	def test_remover_autor(self):
-		db.session.add(models.Usuario('User1','Senha1', 'Endereco1', '1', 'M'))
-		db.session.add(models.Usuario('User2','Senha2', 'Endereco2', '2', 'F'))
+		db.session.add(models.Usuario('User1','Senha1', 'Endereco1', '1', 'M', 'U'))
+		db.session.add(models.Usuario('User2','Senha2', 'Endereco2', '2', 'F', 'U'))
 		db.session.add(models.Emprestimo(1, 'pendente'))
 		exemplar = models.Exemplar('titulo1', 'editora1', 'primeira', 1, 'observacao1', 1, 1)
 		exemplar2 = models.Exemplar('titulo2', 'editora2', 'primeira', 1, 'observacao2', 1, 2)
