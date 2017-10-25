@@ -228,11 +228,9 @@ def alterarAutor(index):
 		biografia = request.form['biografia']
 		exemplar = request.form.get('exemplar')
 		if (exemplar is not None):
-			print('exemplar none')
 			exemplar_add = models.Exemplar.query.filter_by(id = exemplar).first()
-			print(exemplar_add)
 
-		models.alterar_autor(index, nome, biografia, exemplar_add)
+		models.alterar_autor(index, nome, exemplar_add, biografia)
 		flash('Autor alterado com sucesso!')
 		return redirect(url_for('cadautor'))
 	autor = models.Autor.query.get(index)
