@@ -158,7 +158,7 @@ class Autor(db.Model):
         self.biografia = biografia
         self.exemplares.append(exemplar)
 
-def alterar_usuario(id, nome, endereco = None, cpf = None, sexo = None, usuario = None, tipo = None, senha = None):
+def alterar_usuario(id, nome, endereco = None, cpf = None, sexo = None, tipo = None, senha = None):
     usuario = Usuario.query.get(id)
 
     if usuario is not None:
@@ -166,7 +166,6 @@ def alterar_usuario(id, nome, endereco = None, cpf = None, sexo = None, usuario 
         usuario.endereco = endereco
         usuario.cpf = cpf
         usuario.sexo = sexo
-        usuario.usuario = usuario
         usuario.tipo = tipo
         usuario.senha = senha
         db.session.commit()

@@ -106,7 +106,7 @@ def cadusuario():
 		endereco = request.form['endereco']
 		cpf = request.form['cpf']
 		sexo = request.form['sexo']
-		usuario = request.form['usuario']
+		#usuario = request.form['usuario']
 		tipo = request.form['tipo']
 		senha = request.form['senha']
 		confSenha = request.form['confirmarSenha']
@@ -136,11 +136,11 @@ def alterarUsuario(index):
 		endereco = request.form['endereco']
 		cpf = request.form['cpf']
 		sexo = request.form['sexo']
-		usuario = request.form['usuario']
+		#usuario = request.form['usuario']
 		tipo = request.form['tipo']
 		senha = request.form['senha']
 		confSenha = request.form['confirmarSenha']
-		models.alterar_usuario(index, nome, endereco, cpf, sexo, usuario, tipo, senha)
+		models.alterar_usuario(index, nome, endereco, cpf, sexo, tipo, senha)
 		flash('Usuário alterado com sucesso!')
 		return redirect(url_for('cadusuario'))
 	usuario = models.Usuario.query.get(index)
