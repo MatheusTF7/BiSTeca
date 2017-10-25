@@ -64,10 +64,10 @@ def sobre():
 @app.route('/contato', methods=['GET', 'POST'])
 def contato():
 	if request.method == 'POST':
-		nome = request.form['nome']
-		email = request.form['email']
-		cpf = request.form['cpf']
-		msg = request.form['msg']
+		nome = request.form.get('nome')
+		email = request.form.get('email')
+		cpf = request.form.get('cpf')
+		msg = request.form.get('msg')
 		db.session.add(models.Contato(nome, email, cpf, msg))
 		db.session.commit()
 		flash('Contato enviado com sucesso!')
@@ -86,10 +86,10 @@ def alterarContato(index):
 	if 'usuario' not in session or session['usuario'] != 'Adm':
 		return render_template('index.html', sec = session)
 	if request.method == 'POST':
-		nome = request.form['nome']
-		email = request.form['email']
-		cpf = request.form['cpf']
-		msg = request.form['msg']
+		nome = request.form.get('nome')
+		email = request.form.get('email')
+		cpf = request.form.get('cpf')
+		msg = request.form.get('msg')
 		models.alterar_contato(index, nome, email, cpf, msg)
 		flash('Contato alterado com sucesso!')
 		return redirect(url_for('contato'))
@@ -102,14 +102,14 @@ def cadusuario():
 	if 'usuario' not in session or session['usuario'] != 'Adm':
 		return render_template('index.html', sec = session)
 	if request.method == 'POST':
-		nome = request.form['nome']
-		endereco = request.form['endereco']
-		cpf = request.form['cpf']
-		sexo = request.form['sexo']
+		nome = request.form.get('nome')
+		endereco = request.form.get('endereco')
+		cpf = request.form.get('cpf')
+		sexo = request.form.get('sexo')
 		#usuario = request.form['usuario']
-		tipo = request.form['tipo']
-		senha = request.form['senha']
-		confSenha = request.form['confirmarSenha']
+		tipo = request.form.get('tipo')
+		senha = request.form.get('senha')
+		confSenha = request.form.get('confirmarSenha')
 		if (senha == confSenha):
 			db.session.add(models.Usuario(nome, senha, endereco, cpf, sexo, tipo))
 			db.session.commit()
@@ -132,14 +132,14 @@ def alterarUsuario(index):
 	if 'usuario' not in session or session['usuario'] != 'Adm':
 		return render_template('index.html', sec = session)
 	if request.method == 'POST':
-		nome = request.form['nome']
-		endereco = request.form['endereco']
-		cpf = request.form['cpf']
-		sexo = request.form['sexo']
+		nome = request.form.get('nome')
+		endereco = request.form.get('endereco')
+		cpf = request.form.get('cpf')
+		sexo = request.form.get('sexo')
 		#usuario = request.form['usuario']
-		tipo = request.form['tipo']
-		senha = request.form['senha']
-		confSenha = request.form['confirmarSenha']
+		tipo = request.form.get('tipo')
+		senha = request.form.get('senha')
+		confSenha = request.form.get('confirmarSenha')
 		models.alterar_usuario(index, nome, endereco, cpf, sexo, tipo, senha)
 		flash('Usuário alterado com sucesso!')
 		return redirect(url_for('cadusuario'))
@@ -200,10 +200,10 @@ def cadautor():
 	if 'usuario' not in session or session['usuario'] != 'Adm':
 		return render_template('index.html', sec = session)
 	if request.method == 'POST':
-		nome = request.form['nome']
+		nome = request.form.get('nome')
 		exemplar = request.form.get('exemplar')
 		#print(exemplar)
-		biografia = request.form['biografia']
+		biografia = request.form.get('biografia')
 		if (exemplar is not None):
 			exemplar_add = models.Exemplar.query.filter_by(id = exemplar).first()
 		db.session.add(models.Autor(nome, biografia, exemplar_add))
@@ -224,8 +224,8 @@ def alterarAutor(index):
 	if 'usuario' not in session or session['usuario'] != 'Adm':
 		return render_template('index.html', sec = session)
 	if request.method == 'POST':
-		nome = request.form['nome']
-		biografia = request.form['biografia']
+		nome = request.form.get('nome')
+		biografia = request.form.get('biografia')
 		exemplar = request.form.get('exemplar')
 		if (exemplar is not None):
 			exemplar_add = models.Exemplar.query.filter_by(id = exemplar).first()
@@ -247,9 +247,9 @@ def emprestimo():
 	if 'usuario' not in session or session['usuario'] != 'Adm':
 		return render_template('index.html', sec = session)
 	if request.method == 'POST':
-		usuario = request.form['usuario']
+		usuario = request.form.get('usuario')
 		#exemplar = request.form['exemplar']
-		status = request.form['status']
+		status = request.form.get('status')
 		db.session.add(models.Emprestimo(usuario, status))
 		db.session.commit()
 		flash('Empréstimo cadastrado com sucesso!')
