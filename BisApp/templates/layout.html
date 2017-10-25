@@ -59,9 +59,9 @@
         </ul>
         <img src="/static/images/profile-pictures.png" class="img-fluid" width="42px" height="42px" style="margin-right: 5px">
           {% if 'usuario' in session %}
-          <a href="{{url_for('logout')}}"><button class="btn btn-primary" type="button">Sair</button></a>
+          <a href="{{url_for('logout')}}"><button class="btn btn-primary" type="button">Sair <i class="fa fa-sign-out" aria-hidden="true"></i></button></a>
           {% else %}
-          <a href="{{url_for('login')}}"><button class="btn btn-primary" type="button">Login</button></a> 
+          <a href="{{url_for('login')}}"><button class="btn btn-primary" type="button">Login <i class="fa fa-sign-in" aria-hidden="true"></i></button></a> 
           {% endif %}
     </div>
   </nav>

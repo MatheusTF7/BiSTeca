@@ -51,7 +51,7 @@
                     <tr class="filters">
                         <th><input type="text" class="form-control" placeholder="Código" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Status" disabled></th>
-                        <th><input type="text" class="form-control" placeholder="Usuário" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Cod. Usuário" disabled></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,10 +61,17 @@
                               {% for c in l.__table__.columns.keys(): %}
                                 <td>{{l[c]}}</td>
                               {% endfor %}
-                              <td><a href="#" class="btn" style="background-color: #FFD700; color: black">
+                              {% if l['status'] != 'devolvido' %}
+                              <td><a href="{{url_for('devolverEmprestimo', index=l.id)}}" class="btn btn-success">
                                 <i class="fa fa-pencil fa-fw"></i>
-                                Alterar</a>
+                                Devolver</a>
                               </td>
+                              {% else %}
+                              <td><a href="{{url_for('reabrirEmprestimo', index=l.id)}}" class="btn btn-warning">
+                                <i class="fa fa-pencil fa-fw"></i>
+                                Reabrir</a>
+                              </td>
+                              {% endif %}
                               <td><a href="{{url_for('removerEmprestimo', index=l.id)}}" class="btn btn-danger">
                                 <i class="fa fa-trash-o fa-lg"></i>
                                 Delete</a>

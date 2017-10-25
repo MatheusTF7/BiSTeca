@@ -202,7 +202,7 @@ def cadautor():
 	if request.method == 'POST':
 		nome = request.form['nome']
 		exemplar = request.form.get('exemplar')
-		print(exemplar)
+		#print(exemplar)
 		biografia = request.form['biografia']
 		if (exemplar is not None):
 			exemplar_add = models.Exemplar.query.filter_by(id = exemplar).first()
@@ -218,6 +218,26 @@ def removerAutor(index):
 	models.remover_autor(index)
 	flash('Autor excluído com sucesso!')
 	return redirect('cadautor')
+
+@app.route('/cadautor/alterar/<int:index>', methods=['GET', 'POST'])
+def alterarAutor(index):
+	if 'usuario' not in session or session['usuario'] != 'Adm':
+		return render_template('index.html', sec = session)
+	if request.method == 'POST':
+		nome = request.form['nome']
+		biografia = request.form['biografia']
+		exemplar = request.form.get('exemplar')
+		if (exemplar is not None):
+			print('exemplar none')
+			exemplar_add = models.Exemplar.query.filter_by(id = exemplar).first()
+			print(exemplar_add)
+
+		models.alterar_autor(index, nome, biografia, exemplar_add)
+		flash('Autor alterado com sucesso!')
+		return redirect(url_for('cadautor'))
+	autor = models.Autor.query.get(index)
+	return render_template('cadastro-autor.html', Informacoes = autor, index = index, Lista = models.Autor.query.all(), exemplares = models.Exemplar.query.all(), sec = session)
+
 
 @app.route('/consacervo')
 def consacervo():
@@ -244,6 +264,26 @@ def removerEmprestimo(index):
 	models.remover_emprestimo(index)
 	flash('Empréstimo excluído com sucesso!')
 	return redirect(url_for('emprestimo'))
+
+@app.route('/emprestimo/devolver/<int:index>', methods=['GET', 'POST'])
+def devolverEmprestimo(index):
+	if 'usuario' not in session or session['usuario'] != 'Adm':
+		return render_template('index.html', sec = session)
+	models.alterar_emprestimo(index, 'devolvido')
+	flash('Empréstimo devolvido com sucesso!')
+	return redirect(url_for('emprestimo'))
+	autor = models.Autor.query.get(index)
+	return render_template('emprestimo.html', index = index, Lista = models.Emprestimo.query.all(), sec = session)
+
+@app.route('/emprestimo/reabrir/<int:index>', methods=['GET', 'POST'])
+def reabrirEmprestimo(index):
+	if 'usuario' not in session or session['usuario'] != 'Adm':
+		return render_template('index.html', sec = session)
+	models.alterar_emprestimo(index, 'pendente')
+	flash('Empréstimo alterado para pendente com sucesso!')
+	return redirect(url_for('emprestimo'))
+	autor = models.Autor.query.get(index)
+	return render_template('emprestimo.html', index = index, Lista = models.Emprestimo.query.all(), sec = session)
 
 
 

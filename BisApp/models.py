@@ -224,10 +224,12 @@ def remover_exemplar(id):
     else:
         raise Exception('Exemplar não existe!')
 
-def alterar_autor(id, nome, exemplar = None):
+
+def alterar_autor(id, nome, biografia = None,exemplar = None):
     autor = Autor.query.get(id)
 
     if autor is not None:
+        autor.biografia = biografia
         autor.nome = nome
         autor.exemplares.append(exemplar)
         db.session.commit()
